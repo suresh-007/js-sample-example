@@ -2,7 +2,7 @@ var score = [];
 
 function caluclateMarks() {
     clearMessages("AllSuccess"); clearMessages("AllWarnings"); clearMessages('AllErrors'); 
-    if(!isValidScores()) {
+    if(isValidScores()) {
         document.getElementById("total").innerHTML=""+ getTotal();
         document.getElementById("percent").innerHTML= ""+getPercentage(getTotal());
         document.getElementById("result").innerHTML= isFailed() ? 'Fail' : 'Pass';
@@ -59,20 +59,20 @@ function isFailed() {
 }
 
 function isValidScores() {
-    var hasError = true;
+    var isValied = true;
     for(var i =1; i<=6; i++) {
         if(isNaN(document.getElementById('sub'+i).value)) {
             setMessage('error',"Subject number "+i+" should be number not a charecter.");
-            hasError = true;
+            isValied = false;
         } else if(document.getElementById('sub'+i).value == null || document.getElementById('sub'+i).value == '' ) {
             setMessage('warning',"Please provide marks for  Subject "+i);
-            hasError = true;
+            isValied = false;
         } else {
             score.push(document.getElementById('sub'+i).value);
-            hasError = false;
+           // isValied = true;
         }
     }
 
-    return hasError;
+    return isValied;
 
 }
